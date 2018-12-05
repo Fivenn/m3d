@@ -289,7 +289,6 @@ int main(int argc, char **argv)
 		i = i + 1;
 	}
 
-	SDL_Delay(10000);
 
 	libererScene3d(scn_sol);	//scn_sol est la racine de l'arbre
 	libererFenetre(surface);
