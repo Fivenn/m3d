@@ -119,8 +119,7 @@ void dessinerObjet3d_etu(t_surface * surface, t_objet3d * pt_objet, t_objet3d * 
  * TRANSFORMATION DES OBJETS
  */
 
-void translationObjet3d_etu(t_objet3d * pt_objet, t_point3d * vecteur)
-{
+void translationObjet3d_etu(t_objet3d * pt_objet, t_point3d * vecteur){
 }
 
 void homothetieObjet3d_etu(t_objet3d * pt_objet, float facteurX, float facteurY, float facteurZ)
@@ -131,6 +130,6 @@ void rotationObjet3d_etu(t_objet3d * pt_objet, t_point3d * centre, float degreX,
 {
 }
 
-void transformationObjet3d_etu(t_objet3d * pt_objet, double mat[4][4])
-{
+void transformationObjet3d_etu(t_objet3d * pt_objet, double mat[4][4]){
+	
 }

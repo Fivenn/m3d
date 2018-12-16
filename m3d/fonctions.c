@@ -8,16 +8,16 @@ t_point3d *(*copierPoint3d) (t_point3d * p) = copierPoint3d_PA;
 void (*libererPoint3d) (t_point3d * p) = libererPoint3d_PA;
 
 t_triangle3d *(*definirTriangle3d) (t_point3d * a, t_point3d * b, t_point3d * c) = definirTriangle3d_etu;
-t_triangle3d *(*copierTriangle3d) (t_triangle3d * t) = copierTriangle3d_PA;
+t_triangle3d *(*copierTriangle3d) (t_triangle3d * t) = copierTriangle3d_etu;
 void (*libererTriangle3d) (t_triangle3d * t) = libererTriangle3d_PA;
 void (*differenceVecteur3d) (t_point3d * v1, t_point3d * v2) = differenceVecteur3d_PA;
 void (*sommeVecteur3d) (t_point3d * v1, t_point3d * v2) = sommeVecteur3d_PA;
 void (*divisionVecteur3d) (t_point3d * v1, int n) = divisionVecteur3d_PA;
-t_point3d *(*centreGraviteTriangle3d) (t_triangle3d * t) = centreGraviteTriangle3d_PA;
+t_point3d *(*centreGraviteTriangle3d) (t_triangle3d * t) = centreGraviteTriangle3d_etu;
 
-double (*xmoyen) (t_triangle3d * t) = xmoyen_PA;
-double (*ymoyen) (t_triangle3d * t) = ymoyen_PA;
-double (*zmoyen) (t_triangle3d * t) = zmoyen_PA;
+double (*xmoyen) (t_triangle3d * t) = xmoyen_etu;
+double (*ymoyen) (t_triangle3d * t) = ymoyen_etu;
+double (*zmoyen) (t_triangle3d * t) = zmoyen_etu;
 void (*remplirTriangle3d) (t_surface * surface, t_triangle3d * triangle, Uint32 c, double l, double h, double d) = remplirTriangle3d_etu;
 
 void (*translationTriangle3d) (t_triangle3d * t, t_point3d * vecteur) = translationTriangle3d_etu;
