@@ -3,13 +3,13 @@
 #include "lib_scene3d.h"
 
 t_point3d *(*definirPoint3d) (double x, double y, double z) = definirPoint3d_etu;
-t_point3d *(*definirVecteur3d) (double x, double y, double z) = definirVecteur3d_PA;
+t_point3d *(*definirVecteur3d) (double x, double y, double z) = definirVecteur3d_etu;
 t_point3d *(*copierPoint3d) (t_point3d * p) = copierPoint3d_PA;
 void (*libererPoint3d) (t_point3d * p) = libererPoint3d_PA;
 
 t_triangle3d *(*definirTriangle3d) (t_point3d * a, t_point3d * b, t_point3d * c) = definirTriangle3d_etu;
 t_triangle3d *(*copierTriangle3d) (t_triangle3d * t) = copierTriangle3d_etu;
-void (*libererTriangle3d) (t_triangle3d * t) = libererTriangle3d_PA;
+void (*libererTriangle3d) (t_triangle3d * t) = libererTriangle3d_etu;
 void (*differenceVecteur3d) (t_point3d * v1, t_point3d * v2) = differenceVecteur3d_PA;
 void (*sommeVecteur3d) (t_point3d * v1, t_point3d * v2) = sommeVecteur3d_PA;
 void (*divisionVecteur3d) (t_point3d * v1, int n) = divisionVecteur3d_PA;
@@ -18,15 +18,15 @@ t_point3d *(*centreGraviteTriangle3d) (t_triangle3d * t) = centreGraviteTriangle
 double (*xmoyen) (t_triangle3d * t) = xmoyen_etu;
 double (*ymoyen) (t_triangle3d * t) = ymoyen_etu;
 double (*zmoyen) (t_triangle3d * t) = zmoyen_etu;
-void (*remplirTriangle3d) (t_surface * surface, t_triangle3d * triangle, Uint32 c, double l, double h, double d) = remplirTriangle3d_etu;
+void (*remplirTriangle3d) (t_surface * surface, t_triangle3d * triangle, Uint32 c, double l, double h, double d) = remplirTriangle3d_PA; //remplirTriangle3d_etu faite mais souhait de garder la version PA pour avoir le bon focus caméra
 
 void (*translationTriangle3d) (t_triangle3d * t, t_point3d * vecteur) = translationTriangle3d_etu;
 void (*rotationTriangle3d) (t_triangle3d * t, t_point3d * centre, float degreX, float degreY, float degreZ) = rotationTriangle3d_etu;
 void (*transformationTriangle3d) (t_triangle3d * t, double mat[4][4]) = transformationTriangle3d_etu;
 
-t_objet3d *(*objet_vide) () = objet_vide_PA;
+t_objet3d *(*objet_vide) () = objet_vide_etu;
 t_objet3d *(*objet_fichier) (char *fn, Uint32 c1, Uint32 c2) = objet_fichier_PA;
-t_objet3d *(*camera) (double l, double h, double n, double f, double d) = camera_PA;
+t_objet3d *(*camera) (double l, double h, double n, double f, double d) = camera_etu;
 t_objet3d *(*parallelepipede) (double lx, double ly, double lz) = parallelepipede_PA;
 t_objet3d *(*tore) (double r1, double r2, double nlat, double nlong) = tore_PA;
 t_objet3d *(*sphere) (double r, double nlat, double nlong) = sphere_PA;
@@ -37,7 +37,7 @@ t_objet3d *(*sinc) (double lx, double lz, double nx, double nz) = sinc_PA;
 t_objet3d *(*sierpinski) (double lx, double ly, double lz, int n) = sierpinski_PA;
 t_objet3d *(*copierObjet3d) (t_objet3d * o) = copierObjet3d_PA;
 void (*composerObjet3d) (t_objet3d * o, t_objet3d * o2) = composerObjet3d_PA;
-void (*libererObjet3d) (t_objet3d * o) = libererObjet3d_PA;
+void (*libererObjet3d) (t_objet3d * o) = libererObjet3d_etu;
 t_point3d *(*centreGraviteObjet3d) (t_objet3d * o) = centreGraviteObjet3d_PA;
 void (*trierObjet3d) (t_objet3d * pt_objet) = trierObjet3d_PA;
 void (*dessinerObjet3d) (t_surface * surface, t_objet3d * pt_objet, t_objet3d * camera) = dessinerObjet3d_PA;

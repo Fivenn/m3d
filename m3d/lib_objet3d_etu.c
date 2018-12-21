@@ -6,8 +6,7 @@
 
 int nb_faces = 0;
 
-t_maillon *__cree_maillon_etu(t_triangle3d * face, Uint32 couleur)
-{
+t_maillon *__cree_maillon_etu(t_triangle3d * face, Uint32 couleur){
 	return NULL;
 }
 
@@ -19,14 +18,32 @@ void __insere_tete_etu(t_objet3d * pt_objet, t_maillon * pt_maillon)
  * CREATION DES OBJETS
  */
 
-t_objet3d *objet_vide_etu()
-{
-	return NULL;
+t_objet3d *objet_vide_etu(){
+	t_objet3d * obj=(t_objet3d *)malloc(sizeof(t_objet3d)); //Attention au malloc !!
+	obj->est_trie=false;
+	obj->est_camera=false;
+	obj->largeur=0.0;
+	obj->hauteur=0.0;
+	obj->proche=0.0;
+	obj->loin=0.0;
+	obj->distance_ecran=0.0;
+	obj->possede_texture=false;
+	obj->texture=NULL;
+	obj->tete=NULL;
+
+	return obj;
 }
 
 t_objet3d *camera_etu(double l, double h, double n, double f, double d)
 {
 	t_objet3d *pt_objet = objet_vide();
+	pt_objet->est_camera=true;
+	pt_objet->largeur=l;
+	pt_objet->hauteur=h;
+	pt_objet->proche=n;
+	pt_objet->loin=f;
+	pt_objet->distance_ecran=d;
+
 	return pt_objet;
 }
 
@@ -98,8 +115,16 @@ void composerObjet3d_etu(t_objet3d * o, t_objet3d * o2)
 {				/* o = o+o2, o2 ne signifiera plus rien */
 }
 
-void libererObjet3d_etu(t_objet3d * o)
-{
+void libererObjet3d_etu(t_objet3d * o){
+	t_maillon* tmp=o->tete;
+	t_maillon* tmp2;
+	while(tmp!=NULL){
+		tmp2=tmp->pt_suiv;
+		libererTriangle3d(tmp->face);
+		free(tmp);
+		tmp=tmp2;
+	}
+	free(o);
 }
 
 t_point3d *centreGraviteObjet3d_etu(t_objet3d * o)	//attention malloc (definirVecteur)

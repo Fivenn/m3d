@@ -57,6 +57,9 @@ t_triangle3d *copierTriangle3d_etu(t_triangle3d * t)	// attention malloc multipl
 
 void libererTriangle3d_etu(t_triangle3d * t)
 {
+	free(t->abc[0]);
+	free(t->abc[1]);
+	free(t->abc[2]);
 	free(t);
 }
 
@@ -96,7 +99,7 @@ double zmoyen_etu(t_triangle3d * t){
 
 t_point3d *centreGraviteTriangle3d_etu(t_triangle3d * t)	// attention malloc (definirPoint)
 {
-	t_point3d * tmp=definirPoint3d_etu((double)t->abc[0],(double)t->abc[1] , zmoyen(t));
+	t_point3d * tmp=definirPoint3d_etu(xmoyen_etu(t), ymoyen_etu(t), zmoyen_etu(t));
 	return tmp;
 }
 
@@ -107,10 +110,10 @@ void remplirTriangle3d_etu(t_surface * surface, t_triangle3d * triangle, Uint32 
 	t_point2d * c=definirPoint2d(surface->x/2+(int)triangle->abc[2]->xyzt[0], surface->y/2-(int)triangle->abc[2]->xyzt[1]);
 	t_triangle2d * t2d=definirTriangle2d(a, b, c);
 	remplirTriangle2d(surface, t2d, couleur);
-	libererTriangle2d(t2d);
 	libererPoint2d(a);
 	libererPoint2d(b);
 	libererPoint2d(c);
+	libererTriangle2d(t2d);
 }
 
 void translationTriangle3d_etu(t_triangle3d * t, t_point3d * vecteur){
