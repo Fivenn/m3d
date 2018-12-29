@@ -83,6 +83,8 @@ void rotationObjet3d_etu(t_objet3d * pt_objet, t_point3d * centre, float degreX,
 void homothetieObjet3d_etu(t_objet3d * pt_objet, float facteurX, float facteurY, float facteurZ);
 void transformationObjet3d_etu(t_objet3d * pt_objet, double mat[4][4]);
 
+t_objet3d *monObjet();
+
 /*
  * -------------------------------------------
  */

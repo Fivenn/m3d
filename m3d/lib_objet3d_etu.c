@@ -6,12 +6,19 @@
 
 int nb_faces = 0;
 
-t_maillon *__cree_maillon_etu(t_triangle3d * face, Uint32 couleur){
-	return NULL;
+t_maillon *__cree_maillon_etu(t_triangle3d * face, Uint32 couleur){ //Attention au malloc !!
+	t_maillon* m=(t_maillon *)malloc(sizeof(t_maillon));
+
+	m->face=face;
+	m->couleur=couleur;
+	m->pt_suiv=NULL;
+
+	return m;
 }
 
-void __insere_tete_etu(t_objet3d * pt_objet, t_maillon * pt_maillon)
-{
+void __insere_tete_etu(t_objet3d * pt_objet, t_maillon * pt_maillon){
+	pt_maillon->pt_suiv=pt_objet->tete;
+	pt_objet->tete=pt_maillon;
 }
 
 /*
@@ -20,6 +27,7 @@ void __insere_tete_etu(t_objet3d * pt_objet, t_maillon * pt_maillon)
 
 t_objet3d *objet_vide_etu(){
 	t_objet3d * obj=(t_objet3d *)malloc(sizeof(t_objet3d)); //Attention au malloc !!
+
 	obj->est_trie=false;
 	obj->est_camera=false;
 	obj->largeur=0.0;
@@ -99,6 +107,46 @@ t_objet3d *sierpinski_etu(double lx, double ly, double lz, int n)
 {
 	t_objet3d *pt_objet = objet_vide();
 	return pt_objet;
+}
+
+void creerCarre3d(t_objet3d *obj, Uint32 couleur, double x, double y, double z){
+	//Face avant
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+0.0, y+0.0, z+0.0), definirPoint3d(x+0.0, y+1.0, z+0.0), definirPoint3d(x+1.0, y+0.0, z+0.0)), couleur));
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+1.0, y+1.0, z+0.0), definirPoint3d(x+0.0, y+1.0, z+0.0), definirPoint3d(x+1.0, y+0.0, z+0.0)), couleur));
+	//Face arrière
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+0.0, y+0.0, z+1.0), definirPoint3d(x+0.0, y+1.0, z+1.0), definirPoint3d(x+1.0, y+0.0, z+1.0)), couleur));
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+1.0, y+1.0, z+1.0), definirPoint3d(x+0.0, y+1.0, z+1.0), definirPoint3d(x+1.0, y+0.0, z+1.0)), couleur));
+	//Face dessous
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+0.0, y+0.0, z+0.0), definirPoint3d(x+0.0, y+0.0, z+1.0), definirPoint3d(x+1.0, y+0.0, z+0.0)), couleur));
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+1.0, y+0.0, z+0.0), definirPoint3d(x+1.0, y+0.0, z+1.0), definirPoint3d(x+0.0, y+0.0, z+1.0)), couleur));
+	//Face dessus
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+0.0, y+1.0, z+0.0), definirPoint3d(x+0.0, y+1.0, z+1.0), definirPoint3d(x+1.0, y+1.0, z+0.0)), couleur));
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+1.0, y+1.0, z+0.0), definirPoint3d(x+1.0, y+1.0, z+1.0), definirPoint3d(x+0.0, y+1.0, z+1.0)), couleur));
+	//Face droite
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+0.0, y+0.0, z+0.0), definirPoint3d(x+0.0, y+0.0, z+1.0), definirPoint3d(x+0.0, y+1.0, z+0.0)), couleur));
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+0.0, y+1.0, z+0.0), definirPoint3d(x+0.0, y+1.0, z+1.0), definirPoint3d(x+0.0, y+0.0, z+1.0)), couleur));
+	//Face gauche
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+1.0, y+0.0, z+0.0), definirPoint3d(x+1.0, y+0.0, z+1.0), definirPoint3d(x+1.0, y+1.0, z+1.0)), couleur));
+	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+1.0, y+0.0, z+0.0), definirPoint3d(x+1.0, y+1.0,z+0.0), definirPoint3d(x+1.0, y+1.0, z+1.0)), couleur));
+}
+
+t_objet3d *monObjet(Uint32 couleur){
+	t_objet3d *obj=objet_vide();
+	FILE *fichier=NULL;
+	double coordonnees[3]={0};
+	int res_fscanf=0;
+
+	fichier=fopen("mon_objet.txt", "r");
+
+	if(fichier!=NULL){
+		while(res_fscanf!=EOF){
+		res_fscanf=fscanf(fichier, "%le %le %le", &coordonnees[0], &coordonnees[1], &coordonnees[2]);
+		creerCarre3d(obj, couleur, coordonnees[0], coordonnees[1], coordonnees[2]);
+		creerCarre3d(obj, couleur, coordonnees[0], coordonnees[1], coordonnees[2]+1);
+		}
+		fclose(fichier);
+	}
+	return obj;
 }
 
 /*

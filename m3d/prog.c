@@ -178,8 +178,11 @@ int main(int argc, char **argv)
 	t_objet3d *laby = objet_fichier("./lab1.obj", BLANC, MAUVE);
 	homothetieObjet3d(laby, 10, 10, 10);
 
-	t_objet3d *tez = objet_fichier("./tezeus.obj", NOIR, VERTC);
-	homothetieObjet3d(tez, 3, 3, 3);
+	//t_objet3d *mon_obj = objet_fichier("./cube.obj", NOIR, VERTC);
+	t_objet3d *mon_obj=monObjet(BLEUC);
+	homothetieObjet3d(mon_obj, 3, 3, 3);
+	translationObjet3d(mon_obj, definirVecteur3d(-40, 0.0, 0.0));
+	//rotationObjet3d(mon_obj, definirPoint3d(0.0, 0.0, 0.0), 25.0, 25.0, 0.0);
 
 	t_objet3d *sol = damier(1000, 1000, 30, 20);
 
@@ -187,7 +190,7 @@ int main(int argc, char **argv)
 	t_scene3d *scn_laby = ajouter_relation(scn_sol, laby);
 	translationScene3d(scn_laby, definirVecteur3d(50, 0, 0));	// position de depart de tezeus
 
-	t_scene3d *scn_tez = ajouter_relation(scn_sol, tez);
+	t_scene3d *scn_tez = ajouter_relation(scn_sol, mon_obj);
 	translationScene3d(scn_tez, definirVecteur3d(-450, 0, -350));	// position de depart de tezeus
 
 	cams[0] = ajouter_relation(scn_sol, camera(1.0, 1.0, -100, -1000, -200));	// une camera sur le sol
