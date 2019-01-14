@@ -109,6 +109,7 @@ t_objet3d *sierpinski_etu(double lx, double ly, double lz, int n)
 	return pt_objet;
 }
 
+//Fonction qui permet de créer un carré 3d à placer dans une repère 3d
 void creerCarre3d(t_objet3d *obj, Uint32 couleur, double x, double y, double z){
 	//Face avant
 	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+0.0, y+0.0, z+0.0), definirPoint3d(x+0.0, y+1.0, z+0.0), definirPoint3d(x+1.0, y+0.0, z+0.0)), couleur));
@@ -130,6 +131,7 @@ void creerCarre3d(t_objet3d *obj, Uint32 couleur, double x, double y, double z){
 	__insere_tete_etu(obj, __cree_maillon_etu(definirTriangle3d(definirPoint3d(x+1.0, y+0.0, z+0.0), definirPoint3d(x+1.0, y+1.0,z+0.0), definirPoint3d(x+1.0, y+1.0, z+1.0)), couleur));
 }
 
+//Créer mon objet à partir d'un fichier txt
 t_objet3d *monObjet(Uint32 couleur){
 	t_objet3d *obj=objet_vide();
 	FILE *fichier=NULL;
@@ -204,5 +206,5 @@ void rotationObjet3d_etu(t_objet3d * pt_objet, t_point3d * centre, float degreX,
 }
 
 void transformationObjet3d_etu(t_objet3d * pt_objet, double mat[4][4]){
-	
+
 }

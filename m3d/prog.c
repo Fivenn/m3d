@@ -179,7 +179,7 @@ int main(int argc, char **argv)
 	homothetieObjet3d(laby, 10, 10, 10);
 
 	//t_objet3d *mon_obj = objet_fichier("./cube.obj", NOIR, VERTC);
-	t_objet3d *mon_obj=monObjet(BLEUC);
+	t_objet3d *mon_obj=monObjet(VERTC);
 	homothetieObjet3d(mon_obj, 3, 3, 3);
 	translationObjet3d(mon_obj, definirVecteur3d(-40, 0.0, 0.0));
 	//rotationObjet3d(mon_obj, definirPoint3d(0.0, 0.0, 0.0), 25.0, 25.0, 0.0);
